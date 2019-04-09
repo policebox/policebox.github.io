@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="semantic-aware sky replacement"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="黄金万象">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/03/20/semantic-aware-sky-replacement/"/>
+
+
+<meta name="description" content="内容概括： 流程：sky segmentation - semantic search - sky replacement FCN训练输入：LMSun dataset: 15000 out-door images作为train samples，原本数据集中label合并为11个。1045 images作为testset。评价指标：the pixel accuracy and intersectio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="semantic-aware sky replacement">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/semantic-aware-sky-replacement/index.html">
+<meta property="og:site_name" content="黄金万象">
+<meta property="og:description" content="内容概括： 流程：sky segmentation - semantic search - sky replacement FCN训练输入：LMSun dataset: 15000 out-door images作为train samples，原本数据集中label合并为11个。1045 images作为testset。评价指标：the pixel accuracy and intersectio">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-09T09:59:58.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="semantic-aware sky replacement">
+<meta name="twitter:description" content="内容概括： 流程：sky segmentation - semantic search - sky replacement FCN训练输入：LMSun dataset: 15000 out-door images作为train samples，原本数据集中label合并为11个。1045 images作为testset。评价指标：the pixel accuracy and intersectio">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> semantic-aware sky replacement - 黄金万象 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">黄金万象</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          semantic-aware sky replacement
+        
+      </h1>
+
+      <time class="post-time">
+          Mar 20 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>内容概括：</p>
+<p>流程：sky segmentation - semantic search - sky replacement</p>
+<h1 id="FCN训练"><a href="#FCN训练" class="headerlink" title="FCN训练"></a>FCN训练</h1><p>输入：LMSun dataset: 15000 out-door images作为train samples，原本数据集中label合并为11个。1045 images作为testset。<br>评价指标：the pixel accuracy and intersection-over-union (IOU) ratio。<br>输出response map：{f_i^1, f_i^2, …, f_i^n}, n表示n个可能分类，i表示像素，主要是语义分析结果，较为粗略。后期用于构建semantic layout descriptor进行搜索。<br>细化方式：online refinement。</p>
+<ol>
+<li><p>Sky Segmantation<br>FCN results -&gt; online classifiers. 对相邻像素xi、xj，构建公式E(X)。以FCN结果作为先验来训练这个分类器，改变每个像素属于sky/non-sky的分类令熵最小。<br>E(X)参数与项：λ1=λ2=λ3=1，λ4=100；Uc由该像素RGB+高斯混合模型得到，Ut由SVM得到，Uf由response map中sky那一项得到，V也来自response map。Uc、Ut只是令分割更精确，引入response map确保你分割的东西是天空。</p>
+</li>
+<li><p>Sky Search<br>标准：content &amp; layout；论文中待search的图片约为450张。<br>2.1 semantic layout descriptor<br>过去使用global descriptors（GIST）。我们提出新的，优点是更具多样性：首先归一化response map得到一维向量H，然后进行类似spatial pyramid pooling method的操作，即把整个图片分为九份，对每一份的response map归一化得H，再加上前面对整个图片的H，最终得到descriptor为一个n*(s+1)的二维向量（s=9）。<br>2.2 selection：选择合适的宽高分辨率。<br>2.3 diversity：确保天空的多样性，based on the inner product of color histograms。</p>
+</li>
+<li><p>Sky Replacement<br>3.1 semantic-aware transfer: match foreground statistics<br>提出新的：基于scene parsing，优点是smooth boundaries。提出语义转化公式，其中包含一个归一化response map的似然值，一个传递函数Tn。为消除噪声，只保留概率排前几名的interpolation（大概就是局部传递），对数值进行标准化，删除foreground object label（之前LMSun标签简化环节中把不要的标签合成这个label）。<br>3.2 Tn的细节：基于是否在参考与输入图片中都存在regions with label n，分为两种情况如下：<br>Matched region: luminance transfer（亮度转换），有公式；chrominance transfer（色度转换），有reference。<br>Non-matched region: 计算从整个参考前景到原始前景的传递函数，依然是亮度有公式色度有参考。</p>
+</li>
+</ol>
+<h1 id="实现思路（云）："><a href="#实现思路（云）：" class="headerlink" title="实现思路（云）："></a>实现思路（云）：</h1><ol>
+<li>直接使用FCN训练图片训练集（手动修改label），得到response map。</li>
+<li>基于这个response map训练二元分类器，用于图片的切割。</li>
+<li>但查找图片时依然用response map，参考基于GIST descriptor的论文实现一个搜索算法，进行sky search，并对得到的结果进行过滤筛选。</li>
+<li>图片替换：这部分参考一下已有的自动替换代码？输入是第二步的结果。</li>
+<li>语义自动转换：亮度转换部分按公式实现数学代码，复杂度不高；色度转换部分参考reference（我还没看，但在GitHub上有一个matlab实现的color transfer可供参考。）</li>
+</ol>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/26/自我辩论/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">自我辩论</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/14/结束就去约会/">
+        <span class="next-text nav-default">结束就去约会</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">阿森纳表现真的很差.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
