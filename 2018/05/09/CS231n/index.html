@@ -40,7 +40,7 @@
 <meta property="og:site_name" content="Police Box - Golden Experience">
 <meta property="og:description" content="lecture 1 进步：硬件升级与数据升级 愿景：输出描述文字；对图片进行语义理解  lecture 2: Image Classification pipeline - Data-driven approach Nearest Neighbor Classifier  12345def train(train_images, train_labels):  #just remember">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-11T10:21:18.762Z">
+<meta property="og:updated_time" content="2019-05-23T13:46:27.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS231n">
 <meta name="twitter:description" content="lecture 1 进步：硬件升级与数据升级 愿景：输出描述文字；对图片进行语义理解  lecture 2: Image Classification pipeline - Data-driven approach Nearest Neighbor Classifier  12345def train(train_images, train_labels):  #just remember">
@@ -139,7 +139,19 @@
 <li>distance metrics on level of whole images can be very unintuitive</li>
 </ul>
 </li>
-<li>Linear Classification</li>
+<li><p>Linear Classification<br> $$ f(x_i;W,b) = W<em>x_i+b $$<br> x_i是竖着的（长</em>宽）的向量，W是（长<em>宽）</em>（类别数）的矩阵，类似分别在三种类别下的卷积核，b是偏置，得到一个代表不同类别分数的向量。<br> 有个人问怎么处理图片大小不同的数据集，答案是处理不了，先缩放。<br> W是训练出来的，将每一行还原成图片就能看到双头马之类的东西。<br> 又有个人问how to deal with color problems，答案是根本解决不了，但神经网络可以看作堆叠的分类器，那个可以解决。<br> Lost function：<br> SVM：计算所有比正确类别分高的score与正确分类score的差，求和。bug：W not unique，如果所有类别都是对的，无论如何对W缩放，最后lost function都为0.<br> Softmax：soft在对[10, -100, -100]也很好处理<br> gradient descent</p>
+<h1 id="lecture-4-Backpropagation-and-Neural-Networks"><a href="#lecture-4-Backpropagation-and-Neural-Networks" class="headerlink" title="lecture 4: Backpropagation and Neural Networks"></a>lecture 4: Backpropagation and Neural Networks</h1><p> 对所有参数求偏微分，得到一个vector，相当于更高效的gradient descent。<br> L(θ)=sum(n=1,N){C^n(θ)} 其中C^n是对单个输入x^n的lost function<br> L(θ)对一个参数w作偏微分，相当于C^n(θ)对w偏微分的和<br> 建议直接看李宏毅那个ppt。对每个neuron的输出z，有：偏微分 =<br> frac{partial C}{partial z} * frac{partial z}{partial w}</p>
+<pre><code>backward pass                   forward pass
+</code></pre><p> 反向传播：类似倒推法，知道frac{partial C}{partial y}，层层推到z。相当于建一个反向nn，activation function为原来的导数。实现：雅各比矩阵</p>
+<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><p> linear：f = Wx<br> 2-layer：f = W2*max(0,W1x)，其中max是激活函数。隐含层的好处是可以给汽车分类，如，隐含层的每一类代表一个汽车朝向等等。</p>
+<ol>
+<li>one time setup</li>
+<li>training dynamics</li>
+<li><p>evaluation</p>
+<p>很少一开始就全局训练，一般会先预训练调整细节，然后去掉分类器，将这个CNN看作一个固定特征提取器。根据数据规模更改最后一层分类器。<br>计算机运算能力并非无穷，don’t be overly ambitious.<br>sigmoid不对称：如果数据输入输出均是原点对称的，它将收敛得更好。<br>relu：可能会有relu在data cloud之外，成为dead relu，永远不被更新。原因可能是learning rate过高，导致它震荡。解决方法：Leaky relu、Prelu，令斜率可被学习。</p>
+</li>
+</ol>
+</li>
 </ol>
 
             </div>
