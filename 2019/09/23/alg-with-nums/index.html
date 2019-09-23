@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+<meta name="description" content="I will definitely not try showing it on a website. Just read Latex. Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="alg with nums">
 <meta property="og:url" content="http://yoursite.com/2019/09/23/alg-with-nums/index.html">
 <meta property="og:site_name" content="Police Box - Golden Experience">
-<meta property="og:description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+<meta property="og:description" content="I will definitely not try showing it on a website. Just read Latex. Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instance">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-23T08:26:38.763Z">
+<meta property="og:updated_time" content="2019-09-23T09:11:58.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="alg with nums">
-<meta name="twitter:description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+<meta name="twitter:description" content="I will definitely not try showing it on a website. Just read Latex. Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instance">
 
 
 
@@ -321,13 +321,24 @@
       
 
       
-        <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>determine if a number is a prime(decision problem)<br>input: number(instance of the problem)<br>output: true/false<br>set of all instances: ${1, 2, …, n}$</p>
+        <p>I will definitely not try showing it on a website. Just read Latex.</p>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>determine if a number is a prime(decision problem)<br>input: number(instance of the problem)<br>output: true/false<br>set of all instances: ${1, 2, …, n}$</p>
 <h1 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h1><ul>
-<li>correctness(proof)<br>  -stops<br>  -correctly solves the problem</li>
-<li>complexity<br>  -time<pre><code>-compare
--useful
--can we do better
-</code></pre>  -space<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2>measure running time? -&gt;count operation numbers, depends on the input<h2 id="make-the-time-complexity"><a href="#make-the-time-complexity" class="headerlink" title="make the time complexity"></a>make the time complexity</h2>depend on the length ($P_n$ instances of size n)<br>$W(n) = \max{T(I)}, I \in Pn$ –worst case<br>$B(n) = \min{T(I)}, I \in Pn$ –best case<br>$A(n) = \sum_{I \in Pn} T(I)P_r(I)$ –average case</li>
+<li>correctness(proof)<ul>
+<li>stops</li>
+<li>correctly solves the problem</li>
+</ul>
+</li>
+<li>complexity<ul>
+<li>time<ul>
+<li>compare</li>
+<li>useful</li>
+<li>can we do better</li>
+</ul>
+</li>
+<li>space<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2>measure running time? -&gt;count operation numbers, depends on the input<h2 id="make-the-time-complexity"><a href="#make-the-time-complexity" class="headerlink" title="make the time complexity"></a>make the time complexity</h2>depend on the length ($P_n$ instances of size n)<br>$W(n) = \max{T(I)}, I \in Pn$ –worst case<br>$B(n) = \min{T(I)}, I \in Pn$ –best case<br>$A(n) = \sum_{I \in Pn} T(I)P_r(I)$ –average case</li>
+</ul>
+</li>
 </ul>
 <h2 id="functions-of-n-instance-size"><a href="#functions-of-n-instance-size" class="headerlink" title="functions of n(instance size)"></a>functions of n(instance size)</h2><p>classify algorithms according to their growth rate</p>
 <h1 id="definitions"><a href="#definitions" class="headerlink" title="definitions"></a>definitions</h1><ul>
@@ -341,8 +352,8 @@ theta classifies functions according to their growth rate
 </code></pre></li>
 </ul>
 <h1 id="relation-3-principles"><a href="#relation-3-principles" class="headerlink" title="relation: 3 principles"></a>relation: 3 principles</h1><p>show that theta is an equivalence<br>relation</p>
-<pre><code>- reflexible    $f(n) \in \Theta(f(n))
-                c1*f(n) &lt;= f(n) &lt;= c2*f(n)$
+<pre><code>- reflexible    $$f(n) \in \Theta(f(n))
+                c1*f(n) &lt;= f(n) &lt;= c2*f(n)$$
 - symmetric     $f(n) \in (g(n))
                 -&gt; c1*g(n) &lt;= f(n) &lt;= c2*g(n)
                 -&gt; 1/c2 * f(n) &lt;= g(n) &lt;= 1/c1 * f(n)
@@ -356,10 +367,10 @@ theta classifies functions according to their growth rate
                 -&gt; c1*c3*h(n) &lt;= f(n)
                 -&gt; c1*c3*h(n) &lt;= f(n) &lt;= c2*c4*h(n), c1*c3 &gt; 0, c2*c4 &gt; 0 $
 </code></pre><p>so theta is an equivalence relation</p>
-<p>Easier way:<br>\lim_{n \to \infty} \frac{f(n)}{g(n)} = \begin{cases}   c &gt; 0 -&gt; f(n) \in \Theta(g(n))<br>                                                    0     -&gt; f(n) \in o(g(n))<br>                                                    \infty -&gt; f(n) \in \omega(g(n))<br>                                        \end{cases}</p>
-<p>\Theta(1)       constant<br>\Theta(lg n)<br>\Theta(lg^k n)  k &gt;= 1, poly logarithmic<br>\Theta(n)       linear<br>\Theta(n^2)<br>\Theta(n^k)     polynomial<br>\Theta(b^n)     b &gt; 1, exponential<br>\Theta(n!)      factorial</p>
-<p>L’Hopital’s rule case:<br>\lim_{n \to \infty} \frac{lg^k n}{n} = \lim_{n \to \infty} \frac{k<em>(lg n)^(k-1)</em>(1/[n<em>ln2])}{1}<br>                                     = \lim_{n \to \infty} \frac{k}{ln2} </em> \frac{(lg n)^(k-1)}{n}<br>                                     = \lim_{n \to \infty} \frac{(lg n)^(k-1)}{n}<br>case 1: k is an integer              = \lim_{n \to \infty} 1/n = 0<br>case 2: not an integer               = \lim_{n \to \infty} \frac{(lg n)^(k-[k])}{n} = 0</p>
-<p>n! case:<br>fact(n) = \int_{0}^{infty} x^n<em>e^(-x) dx    (Gamma function)<br>        = -x^n</em>e^(-x) - \int_{0}^{infty} -x^(n-1)<em>e^(-x)</em>n dx<br>        = -(x^n/e^x) |(0-&gt;infty) + n <em> \int_{0}^{infty} x^(n-1)</em>e^(-x) dx<br>        = -(x^n/e^x) |(0-&gt;infty) + n <em> fact(n-1)<br>Stirling Approximation:<br>n! = {\sqrt {2</em>pi<em>n}} </em> (n/e)^n \in \Theta(n^n)<br>*waiting for fdu material</p>
+<p>Easier way:<br>$$\lim_{n \to \infty} \frac{f(n)}{g(n)} =<br>\begin{cases}<br>c &gt; 0 &amp; -&gt; f(n) \in \theta(g(n)) \\<br>0 &amp; -&gt; f(n) \in o(g(n)) \\<br>\infty &amp;     -&gt; f(n) \in \omega(g(n))<br>\end{cases}$$</p>
+<p>$\Theta(1)       constant\\<br>\Theta(lg n)\\<br>\Theta(lg^k n)  k &gt;= 1, poly logarithmic\\<br>\Theta(n)       linear\\<br>\Theta(n^2)\\<br>\Theta(n^k)     polynomial\\<br>\Theta(b^n)     b &gt; 1, exponential\\<br>\Theta(n!)      factorial $</p>
+<p>L’Hopital’s rule case:<br>$$\lim_{n \to \infty} \frac{lg^k n}{n} = \lim_{n \to \infty} \frac{k \ast (\lg n)^{(k-1)}) \ast \frac{1}{nln2}}{1} \\<br>= \lim_{n \to \infty} \frac{k}{\ln2} * \frac{(\lg n)^{(k-1)}}{n}\\<br>= \lim_{n \to \infty} \frac{(\lg n)^{(k-1)}}{n} \\<br>case 1: k is an integer                = \lim_{n \to \infty} 1/n = 0 \\<br>case 2: not an integer                 = \lim_{n \to \infty} \frac{(\lg n)^{(k-[k])}}{n} = 0$$</p>
+<p>n! case:<br>$$fact(n) = \int_{0}^{\infty} x^n \ast e^{-x} dx  (Gamma function) \\<br>        = -x^n \ast e^{-x} - \int_{0}^{\infty} -x^{n-1} \ast e^{-x} \ast n dx \\<br>        = -(x^n/e^x) |(0-&gt;\infty) + n \ast \int_{0}^{\infty} x^{n-1} \ast e^{-x} dx \\<br>        = -(x^n/e^x) |(0-&gt;\infty) + n \ast fact(n-1)$$<br>Stirling Approximation:<br>$$n! = {\sqrt {2 \ast pi \ast n}} \ast (n/e)^n \in \Theta(n^n)$$<br>*waiting for fdu material</p>
 <h1 id="Cryptography-Operations-on-bits-number-operations"><a href="#Cryptography-Operations-on-bits-number-operations" class="headerlink" title="Cryptography: Operations on bits(number operations)"></a>Cryptography: Operations on bits(number operations)</h1><p>numbers: 100’s of bits long</p>
 <ul>
 <li>Addition  adding 3 1-bit numbers gives at most a 2-bit result(1+1=11)</li>
