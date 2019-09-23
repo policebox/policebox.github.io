@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+<meta property="og:type" content="article">
+<meta property="og:title" content="alg with nums">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/alg-with-nums/index.html">
+<meta property="og:site_name" content="Police Box - Golden Experience">
+<meta property="og:description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-23T08:26:38.763Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="alg with nums">
+<meta name="twitter:description" content="Problemdetermine if a number is a prime(decision problem)input: number(instance of the problem)output: true/falseset of all instances: ${1, 2, …, n}$ Algorithms correctness(proof)  -stops  -correctly">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/alg-with-nums/"/>
+
+
+
+
+
+  <title>alg with nums | Police Box - Golden Experience</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Police Box - Golden Experience</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">not TARDIS</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/alg-with-nums/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="阿森纳表现真的很差">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Police Box - Golden Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">alg with nums</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-23T04:16:59-04:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>determine if a number is a prime(decision problem)<br>input: number(instance of the problem)<br>output: true/false<br>set of all instances: ${1, 2, …, n}$</p>
+<h1 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h1><ul>
+<li>correctness(proof)<br>  -stops<br>  -correctly solves the problem</li>
+<li>complexity<br>  -time<pre><code>-compare
+-useful
+-can we do better
+</code></pre>  -space<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2>measure running time? -&gt;count operation numbers, depends on the input<h2 id="make-the-time-complexity"><a href="#make-the-time-complexity" class="headerlink" title="make the time complexity"></a>make the time complexity</h2>depend on the length ($P_n$ instances of size n)<br>$W(n) = \max{T(I)}, I \in Pn$ –worst case<br>$B(n) = \min{T(I)}, I \in Pn$ –best case<br>$A(n) = \sum_{I \in Pn} T(I)P_r(I)$ –average case</li>
+</ul>
+<h2 id="functions-of-n-instance-size"><a href="#functions-of-n-instance-size" class="headerlink" title="functions of n(instance size)"></a>functions of n(instance size)</h2><p>classify algorithms according to their growth rate</p>
+<h1 id="definitions"><a href="#definitions" class="headerlink" title="definitions"></a>definitions</h1><ul>
+<li>$g(n)$    functions $f(n)$ for which $g(n)$ is an upper bound<pre><code>$O(g(n)) = {f(n) | f(n) &lt;= c*g(n), c &gt; 0}$
+($f(n)$ grows no faster than $g(n)$)
+</code></pre></li>
+<li>g(n)      a lower bound<pre><code>$\Omega(g(n)) = {f(n) | f(n) &gt;= c*g(n), c &gt; 0}$
+</code></pre>$f: N-&gt;R+$<pre><code>-&gt;f must be non decreasing
+</code></pre>$\theta(g(n))   = O(g(n)) \cap \Omega(g(n))<pre><code>    = {f(n) | c1*g(n) &lt;= f(n) &lt;= c2*g(n)}$
+theta classifies functions according to their growth rate
+</code></pre></li>
+</ul>
+<h1 id="relation-3-principles"><a href="#relation-3-principles" class="headerlink" title="relation: 3 principles"></a>relation: 3 principles</h1><p>show that theta is an equivalence<br>relation</p>
+<pre><code>- reflexible    $f(n) \in \Theta(f(n))
+                c1*f(n) &lt;= f(n) &lt;= c2*f(n)$
+- symmetric     $f(n) \in (g(n))
+                -&gt; c1*g(n) &lt;= f(n) &lt;= c2*g(n)
+                -&gt; 1/c2 * f(n) &lt;= g(n) &lt;= 1/c1 * f(n)
+                -&gt; d2 * f(n) &lt;= g(n) &lt;= d1 * f(n)
+                -&gt; g(n) \in \Theta(f(n))$
+- transitive    $if f(n) \in \Theta(g(n)) and g(n) \in \Theta(h(n))
+                -&gt; f(n) \in \Theta(h(n))$
+                Proof: assumption$
+                -&gt; c1*g(n) &lt;= f(n) &lt;= c2*g(n) and c3*h(n) &lt;= g(n) &lt;= c4*h(n)
+                -&gt; c3*h(n) &lt;= g(n) &lt;= 1/c1 * f(n)
+                -&gt; c1*c3*h(n) &lt;= f(n)
+                -&gt; c1*c3*h(n) &lt;= f(n) &lt;= c2*c4*h(n), c1*c3 &gt; 0, c2*c4 &gt; 0 $
+</code></pre><p>so theta is an equivalence relation</p>
+<p>Easier way:<br>\lim_{n \to \infty} \frac{f(n)}{g(n)} = \begin{cases}   c &gt; 0 -&gt; f(n) \in \Theta(g(n))<br>                                                    0     -&gt; f(n) \in o(g(n))<br>                                                    \infty -&gt; f(n) \in \omega(g(n))<br>                                        \end{cases}</p>
+<p>\Theta(1)       constant<br>\Theta(lg n)<br>\Theta(lg^k n)  k &gt;= 1, poly logarithmic<br>\Theta(n)       linear<br>\Theta(n^2)<br>\Theta(n^k)     polynomial<br>\Theta(b^n)     b &gt; 1, exponential<br>\Theta(n!)      factorial</p>
+<p>L’Hopital’s rule case:<br>\lim_{n \to \infty} \frac{lg^k n}{n} = \lim_{n \to \infty} \frac{k<em>(lg n)^(k-1)</em>(1/[n<em>ln2])}{1}<br>                                     = \lim_{n \to \infty} \frac{k}{ln2} </em> \frac{(lg n)^(k-1)}{n}<br>                                     = \lim_{n \to \infty} \frac{(lg n)^(k-1)}{n}<br>case 1: k is an integer              = \lim_{n \to \infty} 1/n = 0<br>case 2: not an integer               = \lim_{n \to \infty} \frac{(lg n)^(k-[k])}{n} = 0</p>
+<p>n! case:<br>fact(n) = \int_{0}^{infty} x^n<em>e^(-x) dx    (Gamma function)<br>        = -x^n</em>e^(-x) - \int_{0}^{infty} -x^(n-1)<em>e^(-x)</em>n dx<br>        = -(x^n/e^x) |(0-&gt;infty) + n <em> \int_{0}^{infty} x^(n-1)</em>e^(-x) dx<br>        = -(x^n/e^x) |(0-&gt;infty) + n <em> fact(n-1)<br>Stirling Approximation:<br>n! = {\sqrt {2</em>pi<em>n}} </em> (n/e)^n \in \Theta(n^n)<br>*waiting for fdu material</p>
+<h1 id="Cryptography-Operations-on-bits-number-operations"><a href="#Cryptography-Operations-on-bits-number-operations" class="headerlink" title="Cryptography: Operations on bits(number operations)"></a>Cryptography: Operations on bits(number operations)</h1><p>numbers: 100’s of bits long</p>
+<ul>
+<li>Addition  adding 3 1-bit numbers gives at most a 2-bit result(1+1=11)</li>
+<li>Multiplication<br>  multi(x, y)<br>  if y = 0, return 0;<br>  if y is even, t = 2*mult(x, \floor y/2), return t<br>  if y is odd, return t + x<br>  Every recursive call, size of y reduced by 1.<br>  when the size of y is n, execute recursion O(n) times, Total O(n^2)</li>
+<li>Division<br>  div(x, y)<br>  even: x = 2 <em> \floor x/2<br>  odd: 2 </em> \floor x/2 + 1<br>  O(n^2)<h1 id="Modular-Arithemtic"><a href="#Modular-Arithemtic" class="headerlink" title="Modular Arithemtic"></a>Modular Arithemtic</h1>r = x mod y<br>x \equiv y (mod N) <-> N divides (x - y)<br>x is equivalent to y mod N<br>x is congruent to y mod N<h2 id="properties"><a href="#properties" class="headerlink" title="properties:"></a>properties:</h2>x \equiv x’(mod N)<br>y \equiv y’(mod N)<br>x + y \equiv x’ + y’(mod N)<br>xy \equiv x’y’(mod N)<br>commutative<br>associative<br>distributive<br>Example: 2^345 \equiv (2^5)^69 \equiv 31^69 \equiv 1<h2 id="operations-mod-N"><a href="#operations-mod-N" class="headerlink" title="operations (mod N)"></a>operations (mod N)</h2>0 &lt;= x &lt; N, 0 &lt;= y &lt; N; result: 0, 1, …, N-1</-></li>
+<li>add(x, y): O(n))  # n = logN, the size of N<br>  s = x + y<br>  if s &gt;= N<pre><code>s = s - N
+</code></pre>  return s</li>
+<li>multiply(x, y): O(n^2)<br>  (q, r) = div(x*y, N)<br>  return r<br>  largest value: O(n^2)<br>  size of result: O(log(N^2)) = O(log(n))</li>
+<li>Exponentiation: O(n^3)<br>  x^y:<br>  2<em> \floor y/2<br>  pow(x, y)<br>  if y = 0, return 1<br>  t = pow(x, \floor y/2)<br>  if y is even, return t<br>  else return t</em>x</li>
+</ul>
+<h1 id="Greatest-common-divsor"><a href="#Greatest-common-divsor" class="headerlink" title="Greatest common divsor"></a>Greatest common divsor</h1><p>Euclid’s Algorithm<br>    gcd(x, y) = gcd(y, x mod y)</p>
+<ul>
+<li>proof<br>gcd(x, y) = gcd(y, x - ny), n = \floor x/y<br>1) d = gcd(x, y)<br>  -&gt; x = m1d; y = m2d<br>  -&gt; x - ny = m1d - nm2d = (m1 - nm2)d<br>  -&gt; d divides y and x-ny<br>  -&gt; d &lt;= gcd(y, x - ny)<br>2) let d = gcd(x, x - ny)<br>  -&gt; y = m1d; x - ny = m2d<br>  -&gt; x = m2d + ny = m2d + nm1d = (m2 + nm1)d<br>  -&gt; d divides x and y<br>  -&gt; d &lt;= gcd(x, y)<br>therefore, gcd(x, y) &lt;= gcd(y, x - ny) &lt;= gcd(x, y), gcd(x, y) = gcd(y, x - ny)<br>Lemma: if d divides x and y <pre><code>s.t. d = \alpha*x + \beta*y, (\alpha, \beta \in integer)
+&lt;-&gt; d = gcd(x, y)
+</code></pre>  (\alpha, \beta, d) = Euclid(x, y)<br>  base case: x = \alpha<em>x + \beta</em>y</li>
+<li>Algorithm Euclid(x, y)<br>  if y = 0<pre><code>return(1, 0, x)
+</code></pre>  (\alpha’, \beta’, d) = Euclid(y, x mod y)<pre><code>return (\beta&apos;, \alpha&apos; - \beta&apos;\floor x/y)
+</code></pre>  [d =  \alpha’ + \beta’x mod y = \alpha’y + \beta’x - \beta’<em>y</em>\floor x/y<br>  = \beta’x + (\alpha’ - \beta’\floor x/y)*y]</li>
+<li>Analysis<br>1) y &lt;= x/2, x mod y &lt; y &lt;= x/2<br>2) x/2 &lt; y, x mod y = x - y &lt; x/2<br>so x mod y &lt; x/2, 1 bit smaller<br>with every two recursive calls, the input is reduced by 1 bit<br>-&gt; 2n iterations -&gt; O(n)</li>
+<li>Euclid’s time complexity: O(n^3)</li>
+</ul>
+<h1 id="division-mod"><a href="#division-mod" class="headerlink" title="division mod"></a>division mod</h1><p>x/y = x<em>y^-1<br>a is the multiplistive inverse of y, so a</em>y \equiv 1(mod N)<br>Lemma: y has an inverse(mod N) <-> gcd(y, N) = 1<br>a<em>y \equiv 1(mod N)<br>if gcd(y, N) = 1 -&gt; 1 \equiv \alpha y + \beta N (mod N)<br>\beta N \equiv 0(mod N) -&gt; \alpha y \equiv 1(mod N)<br>so \alpha is the multiplicative inverse of y<br>div(x, y, N)<br>    (\alpha, \beta, d) = Euclid(y, N)<br>    if d \neq 1 Error<br>    return x</em>\alpha mod N</-></p>
+<ul>
+<li>analysis: O(n^3)</li>
+</ul>
+<h1 id="Testing-for-primes"><a href="#Testing-for-primes" class="headerlink" title="Testing for primes"></a>Testing for primes</h1><p>Fermat’s Theorem<br>suppose p is prime<br>\prod_{i=1}^{p-1} i \equiv \prod_{i=1}^{p-1} ai (mod p)<br>If N is composite(not prime)[and not a carmichael number],<br>-&gt; \exists a \in {1, …, N - 1} s.t. a^(N-1) \not equiv 1 (mod N)</p>
+<p>a^(N-1) \equiv c(mod N), c \noe 1<br>For each b \in {1, …, N-1} s.t. b^(N-1) \equiv 1(mod N)<br>(ab)^(N-1) \equiv a^(N-1)<em>b^(N-1) \equiv c</em>1 \not equiv 1(mod N)<br>for each b that passes the test there’s a number that fails(bijection)<br>so at leasy 1/2 of {1, …, N - 1} fail the test</p>
+<p>Prime(N)<br>let a1, a2, …, ak \in {1, …, N - 1}<br>if all a pass the test then<br>    return True<br>else<br>    return false</p>
+<p>fail probility &lt;= 1/2^k</p>
+<h2 id="Generate-random-primes"><a href="#Generate-random-primes" class="headerlink" title="Generate random primes"></a>Generate random primes</h2><p>selectiong a random number of n bits long, probability of it being prime &gt;= 1.44/n<br>expected \simeq n<br>\Theta(n)<em>k</em>\Theta(n^3) = \Theta(n^4)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/失恋轮回/" rel="next" title="失恋轮回：18-19赛季">
+                <i class="fa fa-chevron-left"></i> 失恋轮回：18-19赛季
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">阿森纳表现真的很差</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithms"><span class="nav-number">2.</span> <span class="nav-text">Algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Time-Complexity"><span class="nav-number">2.1.</span> <span class="nav-text">Time Complexity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#make-the-time-complexity"><span class="nav-number">2.2.</span> <span class="nav-text">make the time complexity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#functions-of-n-instance-size"><span class="nav-number">2.3.</span> <span class="nav-text">functions of n(instance size)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#definitions"><span class="nav-number">3.</span> <span class="nav-text">definitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#relation-3-principles"><span class="nav-number">4.</span> <span class="nav-text">relation: 3 principles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cryptography-Operations-on-bits-number-operations"><span class="nav-number">5.</span> <span class="nav-text">Cryptography: Operations on bits(number operations)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modular-Arithemtic"><span class="nav-number">6.</span> <span class="nav-text">Modular Arithemtic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#properties"><span class="nav-number">6.1.</span> <span class="nav-text">properties:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operations-mod-N"><span class="nav-number">6.2.</span> <span class="nav-text">operations (mod N)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Greatest-common-divsor"><span class="nav-number">7.</span> <span class="nav-text">Greatest common divsor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#division-mod"><span class="nav-number">8.</span> <span class="nav-text">division mod</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing-for-primes"><span class="nav-number">9.</span> <span class="nav-text">Testing for primes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Generate-random-primes"><span class="nav-number">9.1.</span> <span class="nav-text">Generate random primes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿森纳表现真的很差</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
