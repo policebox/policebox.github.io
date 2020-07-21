@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Class prevalence estimation and casual inferencehttp://slanglab.cs.umass.edu/http://slanglab.cs.umass.edu/doc_prevalence/https://www.aclweb.org/anthology/D18-1487.pdf naive prevalence estimation: coun">
+<meta name="description" content="MLNILPsearches for clauses that entail all positive examples of some relations and no negative examples, or search for clauses that are true in a database of example, whatever. Only 0 and 1 as probabi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="interested papers 2019">
-<meta property="og:url" content="http://yoursite.com/2019/11/08/interested-papers-2019/index.html">
+<meta property="og:title" content="EM algorithm">
+<meta property="og:url" content="http://yoursite.com/2020/06/16/EM-algorithm/index.html">
 <meta property="og:site_name" content="Police Box - Golden Experience">
-<meta property="og:description" content="Class prevalence estimation and casual inferencehttp://slanglab.cs.umass.edu/http://slanglab.cs.umass.edu/doc_prevalence/https://www.aclweb.org/anthology/D18-1487.pdf naive prevalence estimation: coun">
+<meta property="og:description" content="MLNILPsearches for clauses that entail all positive examples of some relations and no negative examples, or search for clauses that are true in a database of example, whatever. Only 0 and 1 as probabi">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-09T07:52:40.160Z">
+<meta property="og:updated_time" content="2020-06-19T01:29:35.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="interested papers 2019">
-<meta name="twitter:description" content="Class prevalence estimation and casual inferencehttp://slanglab.cs.umass.edu/http://slanglab.cs.umass.edu/doc_prevalence/https://www.aclweb.org/anthology/D18-1487.pdf naive prevalence estimation: coun">
+<meta name="twitter:title" content="EM algorithm">
+<meta name="twitter:description" content="MLNILPsearches for clauses that entail all positive examples of some relations and no negative examples, or search for clauses that are true in a database of example, whatever. Only 0 and 1 as probabi">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/08/interested-papers-2019/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/16/EM-algorithm/"/>
 
 
 
 
 
-  <title>interested papers 2019 | Police Box - Golden Experience</title>
+  <title>EM algorithm | Police Box - Golden Experience</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/interested-papers-2019/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/EM-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="阿森纳表现真的很差">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">interested papers 2019</h1>
+          <h1 class="post-title" itemprop="name headline">EM algorithm</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-08T20:25:01-05:00">
-                2019-11-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-16T13:45:39-04:00">
+                2020-06-16
               </time>
             
 
@@ -299,13 +299,51 @@
       
 
       
-        <h1 id="Class-prevalence-estimation-and-casual-inference"><a href="#Class-prevalence-estimation-and-casual-inference" class="headerlink" title="Class prevalence estimation and casual inference"></a>Class prevalence estimation and casual inference</h1><p><a href="http://slanglab.cs.umass.edu/" target="_blank" rel="noopener">http://slanglab.cs.umass.edu/</a><br><a href="http://slanglab.cs.umass.edu/doc_prevalence/" target="_blank" rel="noopener">http://slanglab.cs.umass.edu/doc_prevalence/</a><br><a href="https://www.aclweb.org/anthology/D18-1487.pdf" target="_blank" rel="noopener">https://www.aclweb.org/anthology/D18-1487.pdf</a></p>
-<p>naive prevalence estimation: counting classification decisions of a discriminative classifier, or use a similar aggregation rule. error:</p>
+        <h1 id="MLN"><a href="#MLN" class="headerlink" title="MLN"></a>MLN</h1><h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a>ILP</h2><p>searches for clauses that entail all positive examples of some relations and no negative examples, or search for clauses that are true in a database of example, whatever. Only 0 and 1 as probabilities, what the algorithm does is to find detailed formulas as possible.</p>
+<h2 id="MLN-1"><a href="#MLN-1" class="headerlink" title="MLN"></a>MLN</h2><p>$$P(X=x)=\frac{1}{Z} exp(\sum_{i=1}^{|F|} w_i n_i(x))$$</p>
+<p>$n_i(x)$ +, $P(x)$ +. A binary node for each triplet ground predicate, a binary feature for each triplet-&gt;triplet ground formula, an edge for each triplet-&gt;triplet if both sides appear in one formula i.e. feature=1 for at least 1 grounding.</p>
+<p>Edge = common appear so it’s a clique?</p>
+<p>Learning: maximize pseudo-log-likelihood instead of log likelihood:<br>$$\log p(X_H|w) = \sum_{(h,r,t) \in H} \log p(X_{(h,r,t)}|MB(X_{(h,r,t)}))$$</p>
+<h1 id="EM-algorithm"><a href="#EM-algorithm" class="headerlink" title="EM algorithm"></a>EM algorithm</h1><p>EM algorithm is a generative model shaped by (1) its own predefined structure, parameter $w$. (2) latent variables in some distribution. EM algorithm is making latent variables approximate this distribution.</p>
 <ol>
-<li>biased toward predicting P_train(y)</li>
-<li>low accuracy in difficult tasks(aka low classifier accuracy)<br>their method: combine generative modeling framework, an implicit likelihood generative re-interpretation of an off-the-shelf discriminative classifier. In measurement: uncertainty introduced: prevalence confidence interval</li>
+<li><p>MLE, assume $\sum_{v_H} q(v_H)=1$ is our distribution of $v_H$, given likelihood function<br>$$L(w)=p(v_O|w)=\sum_{v_H} p(v_H, v_O|w)\<br>= \sum_{v_H} q(v_H) \frac{p(v_H, v_O|w)}{q(v_H)}<br>= E_{v_H\sim q}[\frac{p(v_H, v_O|w)}{q(v_H)}]$$<br>$$log(L) = \log \sum_{v_H} q(v_H) \frac{p(v_H, v_O|w)}{q(v_H)} = \log E_{v_H\sim q}[\frac{p(v_H, v_O|w)}{q(v_H)}] \<br>\geq E_{v_H\sim q}[\log \frac{p(v_H, v_O|w)}{q(v_H)}] = \sum_{v_H}q(v_H) \log \frac{p(v_H, v_O|w)}{q(v_H)}$$<br>which is an ELBO of $L(w)$.</p>
+</li>
+<li><p>E-step: </p>
+<p> using current guess of $w$ in our defined model to make the ELBO tight. i.e. maximize ELBO. Update the parameters of $q_{\theta}$ to make such that $\log L = ELBO$.</p>
+<ul>
+<li>MLE: ELBO no need. Directly maximize likelihood function via derivation.</li>
+<li><p>Generally, Jensen’s inequality $X=E(X)$ -&gt; $X=\frac{p(v_H, v_O|w)}{q(v_H)} = c$ is a constant -&gt;<br>  $$q(v_H|\hat{\theta})=\frac{p(v_H, v_O|w)}{c} = \frac{p(v_H, v_O|w)}{\int_{v_H} p(v_H, v_O|w)} = p(v_H|v_O,w)$$</p>
+</li>
+<li><p>Specifically for the paper, optimize ELBO using <a href="https://www.cs.cmu.edu/~epxing/Class/10708-17/notes-17/10708-scribe-lecture13.pdf" target="_blank" rel="noopener">mean field variational inference</a>. Assume $q_{\theta}$ as<br>  $$q(v_H) = \prod_{(h,r,t)\in H} q(v_{(h,r,t)})$$<br>  $$E_{v_H\sim q}[\log q(v_H)]=\sum_{j=1}^{|H|} E_{v_j \sim q(v_j)}[\log q(v_j)]$$<br>  each variable follows its own independent distribution and they are balanced. (see LDA for other applications.) Then<br>  $$p(v_H|v_O, w) = \prod_{j=1}^{|H|} p(v_j|v_1\cdots v_{j-1}, v_O, w)\<br>  =\prod_{j=1}^{|H|} p(v_j|v_{H-j}, v_O, w)$$<br>  where $v_j \in v_H$ i.e. $v_j = v_{h,r,t}$ in arbitrary order. $j$ is only for chain rule writing.</p>
+<p>  Rewrite ELBO as<br>  $$ ELBO = E_{v_H\sim q}[\log p(v_H|v_O, w)\cdot p(v_O|w)] - E_{v_H\sim q}[\log q(v_H)]\<br>  \varpropto \sum_{j=1}^{|H|} E_{v_H\sim q(v_{H-j})}[\log p(v_j|v_{H-j}, v_O, w)] - E_{v_j\sim q(v_j)}[\log q(v_j)]$$<br>  For each variable, (how to derive?)<br>  $$\frac{\partial ELBO}{\partial q(v_j)} = E_{v_H\sim q(v_{H-j})}[\log p(v_j|v_{H-j}, v_O, w)] - \log q(v_j) - 1 = 0$$<br>  $$\log q(v_j) \varpropto E_{v_H \sim q(v_{H-(h,r,t)})}[\log p(v_{(h,r,t)}|v_{H-(h,r,t)}, v_O, w)]$$<br>  the expectation when any mentioned $(h,r,t)$ (i.e.H) follows distribution $q(v_{H-(h,r,t)})$. Acutually they sampled some triplets and assigned 1 to observed triplets, others follow $q$ to approximate the right side. Thus the goal $q(v_H):=p(v_H|v_O, w)$ is achieved by $q(v_j) := p(v_j|\hat{v}_{MB}, w)$. </p>
+<p>  Then update $\theta$ by knowledge graph embedding model to make such that $q(v_j|\theta) = p(v_j|\hat{v}_{MB}, w)$. i.e. maximize $\log q(v_j = 1)$ where the value of $v_j$ is from $p(v_j|\hat{v}_{MB}, w)$. </p>
+</li>
+<li><p>Paper rewrote likelihood function as $L(w) = ELBO + D_{KL}(q(v_H) |p(v_H|v_O, w))$ (by Bayes), minimize KL. Actually the same.</p>
+</li>
+<li>Paper equation 7: a mean field approximation version of minmizing KL as I guess.</li>
+</ul>
+</li>
+<li><p>M-step:</p>
+<p>Maximizing ELBO by updating $w$. First remove fixed denominator and rewrite it as pseudolikelihood function for easy optimization:<br>$$ELBO = E_{v_H\sim q}[\log\frac{p(v_H, v_O|w)}{q(v_H)}]= E_{v_H\sim q}[\log p(v_H, v_O|w)] \<br>= E_{v_H\sim q}[\sum_{(h,r,t)} \log p(v_{(h,r,t)}|v_{MB}, w)]$$<br>where the right side can be derived from both MLN and mean field approximation, maybe MLN is based on mean field approximation.<br>$$\frac{\partial ELBO}{\partial w_l} = \sum_{v_H} q(v_H) \sum_{(h,r,t)}\frac{\partial \log p(v_{(h,r,t)}|v_{MB}, w)}{\partial w_l}\$$</p>
+<!-- = \sum_{(h,r,t)} \sum_{b=0,1} q(v_{(h,r,t)}=b)\frac{\partial \log p(v_{(h,r,t)}=b|v_{MB}, w)}{\partial w_l}$$ -->
+</li>
 </ol>
-
+<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><h2 id="pretrain"><a href="#pretrain" class="headerlink" title="pretrain:"></a>pretrain:</h2><p>read_data(): read_data from file as [observed_triplets], add to [triplets] and [h2rt]. We do some search by [h2rt] so it can be updated with transE probabilities later. </p>
+<p>search_candidate_rules(): search rules by traversing all observed triplets, store rules appear at least once as candidate_rules in this temp epoch then add into [rules]. each element: r_premise-&gt;r_hypothesis. create [rand_idx].</p>
+<p>compute_rule_precision(): traverse triplets, $p=\frac{count(h,p)}{count(p)}$ store as rule.precision. Only keep rule.precision &gt; threshold(0.1) in [rules].</p>
+<p>search_hidden_triplets(): for each kept rule, traverse triplets of r_premise, infer triplets of hypothesis, if not appeared, add to [hidden_triplets], add to [triplets] where [triplets] = [hidden_triplets] + [observed_triplets] has attribute type indicating o or h.</p>
+<p>save(for mln next epoch) and output hidden(for both transE and mln next epoch).</p>
+<h2 id="transE"><a href="#transE" class="headerlink" title="transE"></a>transE</h2><p>save annotations on hidden triplets.</p>
+<h2 id="MLN-2"><a href="#MLN-2" class="headerlink" title="MLN"></a>MLN</h2><p>load(): [id2ent], [ent2id], [id2rel], [rel2id], [triplets], [observed_triplets], [hidden_triplets], [h2rt], [rules]</p>
+<p>read_probability_of_hidden_triplets(): read from annotation file generated by transE, triplet.truth = p, triplet.valid = (p &gt;= threshold(0.7)). Add new valid hidden triplets to [h2rt].</p>
+<p>link_rules(): for each rule, add it to [triplet.rule_ids] for all valid inferred triplets (observed + valid hidden) (add link to triplets with r_h).</p>
+<p>init_weight()</p>
+<p>train_epoch(): traverse triplets, for each triplet,<br>$$p(v|MB) = \sigma(\overline{w_l})$$<br>where $w_l$ are weights of linked rules $l \in L_v$. Mean field, $\sum_v p(v|MB) = w_i n_i(x)$?<br>$$\triangledown_{w_l} = \sum_{v:l\in L_v} \frac{1}{|L_v|} y(v) - p(v|MB)$$<br>$$err = \sqrt{\sum_v(y(v) - p(v|MB))^2}$$</p>
+   <!-- HMM: 
+   $$L = p(y_1\cdots y_n)$$
+   (aka $p(y_1\cdots y_n|\theta)$) 
+   $$p(y_1\cdots y_n|x_1\cdots x_n) = p(x_1\cdots x_n, y_1\cdots y_n)$$
+   - E step: $p($ -->
       
     </div>
     
@@ -329,8 +367,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/05/怀喵·夏末ver/" rel="next" title="怀喵·夏末ver">
-                <i class="fa fa-chevron-left"></i> 怀喵·夏末ver
+              <a href="/2020/04/04/魔鬼的眼睛/" rel="next" title="魔鬼的眼睛">
+                <i class="fa fa-chevron-left"></i> 魔鬼的眼睛
               </a>
             
           </div>
@@ -339,8 +377,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/13/VPN-Helper/" rel="prev" title="VPN Helper">
-                VPN Helper <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/21/铜墙铁壁/" rel="prev" title="铜墙铁壁">
+                铜墙铁壁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -473,7 +511,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Class-prevalence-estimation-and-casual-inference"><span class="nav-number">1.</span> <span class="nav-text">Class prevalence estimation and casual inference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MLN"><span class="nav-number">1.</span> <span class="nav-text">MLN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ILP"><span class="nav-number">1.1.</span> <span class="nav-text">ILP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MLN-1"><span class="nav-number">1.2.</span> <span class="nav-text">MLN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EM-algorithm"><span class="nav-number">2.</span> <span class="nav-text">EM algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pretrain"><span class="nav-number">3.1.</span> <span class="nav-text">pretrain:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transE"><span class="nav-number">3.2.</span> <span class="nav-text">transE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MLN-2"><span class="nav-number">3.3.</span> <span class="nav-text">MLN</span></a></li></ol></li></ol></div>
             
 
           </div>

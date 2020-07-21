@@ -229,6 +229,311 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/semantic-aware-sky-replacement/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="阿森纳表现真的很差">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Police Box - Golden Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/20/semantic-aware-sky-replacement/" itemprop="url">semantic-aware sky replacement</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T05:44:18-04:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper-review/" itemprop="url" rel="index">
+                    <span itemprop="name">paper review</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>内容概括：</p>
+<p>流程：sky segmentation - semantic search - sky replacement</p>
+<h1 id="FCN训练"><a href="#FCN训练" class="headerlink" title="FCN训练"></a>FCN训练</h1><p>输入：LMSun dataset: 15000 out-door images作为train samples，原本数据集中label合并为11个。1045 images作为testset。<br>评价指标：the pixel accuracy and intersection-over-union (IOU) ratio。<br>输出response map：{f_i^1, f_i^2, …, f_i^n}, n表示n个可能分类，i表示像素，主要是语义分析结果，较为粗略。后期用于构建semantic layout descriptor进行搜索。<br>细化方式：online refinement。</p>
+<ol>
+<li><p>Sky Segmantation<br>FCN results -&gt; online classifiers. 对相邻像素xi、xj，构建公式E(X)。以FCN结果作为先验来训练这个分类器，改变每个像素属于sky/non-sky的分类令熵最小。<br>E(X)参数与项：λ1=λ2=λ3=1，λ4=100；Uc由该像素RGB+高斯混合模型得到，Ut由SVM得到，Uf由response map中sky那一项得到，V也来自response map。Uc、Ut只是令分割更精确，引入response map确保你分割的东西是天空。</p>
+</li>
+<li><p>Sky Search<br>标准：content &amp; layout；论文中待search的图片约为450张。<br>2.1 semantic layout descriptor<br>过去使用global descriptors（GIST）。我们提出新的，优点是更具多样性：首先归一化response map得到一维向量H，然后进行类似spatial pyramid pooling method的操作，即把整个图片分为九份，对每一份的response map归一化得H，再加上前面对整个图片的H，最终得到descriptor为一个n*(s+1)的二维向量（s=9）。<br>2.2 selection：选择合适的宽高分辨率。<br>2.3 diversity：确保天空的多样性，based on the inner product of color histograms。</p>
+</li>
+<li><p>Sky Replacement<br>3.1 semantic-aware transfer: match foreground statistics<br>提出新的：基于scene parsing，优点是smooth boundaries。提出语义转化公式，其中包含一个归一化response map的似然值，一个传递函数Tn。为消除噪声，只保留概率排前几名的interpolation（大概就是局部传递），对数值进行标准化，删除foreground object label（之前LMSun标签简化环节中把不要的标签合成这个label）。<br>3.2 Tn的细节：基于是否在参考与输入图片中都存在regions with label n，分为两种情况如下：<br>Matched region: luminance transfer（亮度转换），有公式；chrominance transfer（色度转换），有reference。<br>Non-matched region: 计算从整个参考前景到原始前景的传递函数，依然是亮度有公式色度有参考。</p>
+</li>
+</ol>
+<h1 id="实现思路（云）："><a href="#实现思路（云）：" class="headerlink" title="实现思路（云）："></a>实现思路（云）：</h1><ol>
+<li>直接使用FCN训练图片训练集（手动修改label），得到response map。</li>
+<li>基于这个response map训练二元分类器，用于图片的切割。</li>
+<li>但查找图片时依然用response map，参考基于GIST descriptor的论文实现一个搜索算法，进行sky search，并对得到的结果进行过滤筛选。</li>
+<li>图片替换：这部分参考一下已有的自动替换代码？输入是第二步的结果。</li>
+<li>语义自动转换：亮度转换部分按公式实现数学代码，复杂度不高；色度转换部分参考reference（我还没看，但在GitHub上有一个matlab实现的color transfer可供参考。）</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/结束就去约会/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="阿森纳表现真的很差">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Police Box - Golden Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/14/结束就去约会/" itemprop="url">结束就去约会</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T18:06:02-05:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/踝上草/" itemprop="url" rel="index">
+                    <span itemprop="name">踝上草</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          彼时德比希那组正在休息区，他慢慢吞下一口矿泉水，也跟着女孩子们往回挥，不一样的是他知道他是在叫他。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/14/结束就去约会/">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/13/谁先爱上他的/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1421,324 +1726,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/CS231n/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="阿森纳表现真的很差">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Police Box - Golden Experience">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/09/CS231n/" itemprop="url">CS231n</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T16:48:01-04:00">
-                2018-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper-review/" itemprop="url" rel="index">
-                    <span itemprop="name">paper review</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="lecture-1"><a href="#lecture-1" class="headerlink" title="lecture 1"></a>lecture 1</h1><ol>
-<li>进步：硬件升级与数据升级</li>
-<li>愿景：输出描述文字；对图片进行语义理解</li>
-</ol>
-<h1 id="lecture-2-Image-Classification-pipeline-Data-driven-approach"><a href="#lecture-2-Image-Classification-pipeline-Data-driven-approach" class="headerlink" title="lecture 2: Image Classification pipeline - Data-driven approach"></a>lecture 2: Image Classification pipeline - Data-driven approach</h1><ol>
-<li><p>Nearest Neighbor Classifier</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(train_images, train_labels)</span>:</span>  <span class="comment">#just remember</span></span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(model, test_images)</span>:</span>        <span class="comment">#predict the label of the most similar training image</span></span><br><span class="line">    <span class="keyword">return</span> test_labels</span><br></pre></td></tr></table></figure>
-<ul>
-<li>terrible performance at test time</li>
-<li>distance metrics on level of whole images can be very unintuitive</li>
-</ul>
-</li>
-<li><p>Linear Classification<br> $$ f(x_i;W,b) = W<em>x_i+b $$<br> x_i是竖着的（长</em>宽）的向量，W是（长<em>宽）</em>（类别数）的矩阵，类似分别在三种类别下的卷积核，b是偏置，得到一个代表不同类别分数的向量。<br> 有个人问怎么处理图片大小不同的数据集，答案是处理不了，先缩放。<br> W是训练出来的，将每一行还原成图片就能看到双头马之类的东西。<br> 又有个人问how to deal with color problems，答案是根本解决不了，但神经网络可以看作堆叠的分类器，那个可以解决。<br> Lost function：<br> SVM：计算所有比正确类别分高的score与正确分类score的差，求和。bug：W not unique，如果所有类别都是对的，无论如何对W缩放，最后lost function都为0.<br> Softmax：soft在对[10, -100, -100]也很好处理<br> gradient descent</p>
-<h1 id="lecture-4-Backpropagation-and-Neural-Networks"><a href="#lecture-4-Backpropagation-and-Neural-Networks" class="headerlink" title="lecture 4: Backpropagation and Neural Networks"></a>lecture 4: Backpropagation and Neural Networks</h1><p> 对所有参数求偏微分，得到一个vector，相当于更高效的gradient descent。<br> L(θ)=sum(n=1,N){C^n(θ)} 其中C^n是对单个输入x^n的lost function<br> L(θ)对一个参数w作偏微分，相当于C^n(θ)对w偏微分的和<br> 建议直接看李宏毅那个ppt。对每个neuron的输出z，有：偏微分 =<br> frac{partial C}{partial z} * frac{partial z}{partial w}</p>
-<pre><code>backward pass                   forward pass
-</code></pre><p> 反向传播：类似倒推法，知道frac{partial C}{partial y}，层层推到z。相当于建一个反向nn，activation function为原来的导数。实现：雅各比矩阵</p>
-<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><p> linear：f = Wx<br> 2-layer：f = W2*max(0,W1x)，其中max是激活函数。隐含层的好处是可以给汽车分类，如，隐含层的每一类代表一个汽车朝向等等。</p>
-<ol>
-<li>one time setup</li>
-<li>training dynamics</li>
-<li><p>evaluation</p>
-<p>很少一开始就全局训练，一般会先预训练调整细节，然后去掉分类器，将这个CNN看作一个固定特征提取器。根据数据规模更改最后一层分类器。<br>计算机运算能力并非无穷，don’t be overly ambitious.<br>sigmoid不对称：如果数据输入输出均是原点对称的，它将收敛得更好。<br>relu：可能会有relu在data cloud之外，成为dead relu，永远不被更新。原因可能是learning rate过高，导致它震荡。解决方法：Leaky relu、Prelu，令斜率可被学习。</p>
-</li>
-</ol>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/分轨/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="阿森纳表现真的很差">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Police Box - Golden Experience">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/09/分轨/" itemprop="url">分轨</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-09T07:32:01-05:00">
-                2018-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/踝上草/" itemprop="url" rel="index">
-                    <span itemprop="name">踝上草</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          “你想试试吗？你刚刚说的那个。”威尔希尔忽然坐起来，膝盖拖着带伤的肌理跨过他一条腿，指甲掐住他大腿肉。什琴斯尼只觉得心脏狂跳，好似回到了他刚来阿森纳，和威尔希尔住一起的日子。对方揽住他的脖子，脸埋在他肩膀上，然后笑得发抖。<br/>“你会是个好门将的。”他这样说，收回手，关了灯，背对什琴斯尼躺下，呼吸绵长地睡着了。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/09/分轨/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1784,7 +1776,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
